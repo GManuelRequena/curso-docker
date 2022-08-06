@@ -1,6 +1,10 @@
 package com.manuel.springcloud.msvc.ususarios.models.entity;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
@@ -9,9 +13,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(nullable = false)
     private String name;
 
+    @NotEmpty
+    @Email
     @Column(unique = true)
     private String email;
 

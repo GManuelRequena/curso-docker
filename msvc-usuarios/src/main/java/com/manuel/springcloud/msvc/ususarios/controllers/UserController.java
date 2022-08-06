@@ -2,12 +2,17 @@ package com.manuel.springcloud.msvc.ususarios.controllers;
 
 import com.manuel.springcloud.msvc.ususarios.models.entity.User;
 import com.manuel.springcloud.msvc.ususarios.services.UserService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController()
@@ -34,12 +39,18 @@ public class UserController {
 
     @PostMapping("/save")
     //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> createUser(@RequestBody User user) {
+    public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult result) {
+        if(result.hasErrors()){
+            return validate(result);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editUser(@RequestBody User user, @PathVariable Long id) {
+    public ResponseEntity<?> editUser(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
+        if(result.hasErrors()){
+            return validate(result);
+        }
         Optional<User> userId = userService.byId(id);
         if (userId.isPresent()) {
             User userDB = userId.get();
@@ -59,5 +70,13 @@ public class UserController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    private ResponseEntity<Map<String, String>> validate(BindingResult result) {
+        Map<String, String> errores = new HashMap<>();
+        result.getFieldErrors().forEach(err -> {
+            errores.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
+        });
+        return ResponseEntity.badRequest().body(errores);
     }
 }
