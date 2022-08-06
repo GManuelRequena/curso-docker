@@ -16,30 +16,47 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/get-all")
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userService.getAll();
     }
 
-    @GetMapping("/{id}/get")
-    public ResponseEntity<?> userById(@PathVariable Long id){
+    @GetMapping("/{id}")
+    public ResponseEntity<?> userById(@PathVariable Long id) {
         Optional<User> user = userService.byId(id);
-        if(user.isPresent()){
+        if (user.isPresent()) {
             //return  ResponseEntity.ok().body(user.get());
-            return  ResponseEntity.ok(user.get());
-        }
-        else{
+            return ResponseEntity.ok(user.get());
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping("/save")
     //@ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> save(@RequestBody User user){
+    public ResponseEntity<?> createUser(@RequestBody User user) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
-    @PutMapping("/{id}/delete")
-    public ResponseEntity<?> delete(@PathVariable Long id){
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<?> editUser(@RequestBody User user, @PathVariable Long id) {
+        Optional<User> userId = userService.byId(id);
+        if (userId.isPresent()) {
+            User userDB = userId.get();
+            userDB.setName(user.getName());
+            userDB.setEmail(user.getEmail());
+            userDB.setPassword(user.getPassword());
+            return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDB));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id){
+        Optional<User> userId = userService.byId(id);
+        if(userId.isPresent()){
+            userService.delete(userId.get().getId());
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
