@@ -3,7 +3,6 @@ package org.manuel.springcloud.msvc.cursos.controller;
 import org.manuel.springcloud.msvc.cursos.entity.Course;
 import org.manuel.springcloud.msvc.cursos.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,7 +43,7 @@ public class CourseController {
         Optional<Course> courseId = courseService.byId(id);
         if (courseId.isPresent()) {
             Course courseDB = courseId.get();
-            courseDB.setNombre(course.getNombre());
+            courseDB.setName(course.getName());
             return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(courseDB));
         }
         return ResponseEntity.notFound().build();

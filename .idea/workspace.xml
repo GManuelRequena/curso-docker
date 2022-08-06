@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Course">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/entity/Course.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/entity/Course.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +63,20 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.MsvcCursosApplication">
+    <configuration name="MsvcCursosApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.manuel.springcloud.msvc.cursos.MsvcCursosApplication" />
+      <module name="msvc-cursos" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.manuel.springcloud.msvc.cursos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MsvcUsuariosApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.manuel.springcloud.msvc.ususarios.MsvcUsuariosApplication" />
       <module name="msvc-usuarios" />
@@ -78,6 +92,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MsvcCursosApplication" />
         <item itemvalue="Application.MsvcUsuariosApplication" />
       </list>
     </recent_temporary>
@@ -133,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659794627495</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Course">
+      <created>1659795548174</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659795548174</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
