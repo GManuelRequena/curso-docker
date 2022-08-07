@@ -1,5 +1,8 @@
 package org.manuel.springcloud.msvc.cursos.controller;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.manuel.springcloud.msvc.cursos.entity.Course;
 import org.manuel.springcloud.msvc.cursos.services.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +23,14 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+    @ApiOperation(value = "Get all courses")
     @GetMapping("/get-all")
     public ResponseEntity<List<Course>> getAll() {
         return ResponseEntity.ok(courseService.getAll());
     }
 
+    @ApiOperation(value = "Get course by ID")
+    @ApiImplicitParam(value="Course ID to search", name="id")
     @GetMapping("/{id}")
     public ResponseEntity<Course> getById(@PathVariable Long id) {
         Optional<Course> courseId = courseService.byId(id);
@@ -36,6 +42,7 @@ public class CourseController {
         return courseId.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @ApiOperation(value = "Create a course")
     @PostMapping("/save")
     public ResponseEntity<?> save(@Valid @RequestBody Course course, BindingResult result) {
         if(result.hasErrors()){
@@ -45,6 +52,8 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(courseDB);
     }
 
+    @ApiOperation(value = "Edit a course")
+    @ApiImplicitParam(value="Course ID", name="id")
     @PutMapping("/{id}")
     public ResponseEntity<?> editById(@Valid @RequestBody Course course, BindingResult result, @PathVariable Long id) {
         if(result.hasErrors()){
@@ -59,6 +68,10 @@ public class CourseController {
         return ResponseEntity.notFound().build();
     }
 
+    @ApiOperation(value = "Delete a course")
+    @ApiImplicitParams({
+            @ApiImplicitParam(value="Course ID", name="id")
+    })
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
         Optional<Course> courseDB = courseService.byId(id);

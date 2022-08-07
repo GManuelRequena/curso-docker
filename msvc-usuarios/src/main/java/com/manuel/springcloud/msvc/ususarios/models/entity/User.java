@@ -4,6 +4,7 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -13,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotBlank
     @Column(nullable = false)
     private String name;
 
@@ -22,6 +23,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @NotBlank
     private String password;
 
     public Long getId() {

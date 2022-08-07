@@ -2,7 +2,6 @@ package com.manuel.springcloud.msvc.ususarios.controllers;
 
 import com.manuel.springcloud.msvc.ususarios.models.entity.User;
 import com.manuel.springcloud.msvc.ususarios.services.UserService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,10 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController()
 @RequestMapping("/api/v1/users")
@@ -43,6 +39,12 @@ public class UserController {
         if(result.hasErrors()){
             return validate(result);
         }
+        if(!user.getEmail().isEmpty() && userService.existsByEmail(user.getEmail())){
+            return ResponseEntity.badRequest()
+                    .body(Collections
+                            .singletonMap("message", "Ya existe ese correo electronico")
+                    );
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
     }
 
@@ -54,6 +56,14 @@ public class UserController {
         Optional<User> userId = userService.byId(id);
         if (userId.isPresent()) {
             User userDB = userId.get();
+            if(!user.getEmail().isEmpty()
+                    && !user.getEmail().equalsIgnoreCase(userDB.getEmail())
+                    && userService.byEmail(user.getEmail()).isPresent()){
+                return ResponseEntity.badRequest()
+                        .body(Collections
+                                .singletonMap("message", "Ya existe ese correo electronico")
+                        );
+            }
             userDB.setName(user.getName());
             userDB.setEmail(user.getEmail());
             userDB.setPassword(user.getPassword());
