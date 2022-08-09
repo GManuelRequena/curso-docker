@@ -1,0 +1,460 @@
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.manuel.springcloud.msvc.cursos.controller;\r\n\r\nimport feign.FeignException;\r\nimport io.swagger.annotations.ApiImplicitParam;\r\nimport io.swagger.annotations.ApiImplicitParams;\r\nimport io.swagger.annotations.ApiOperation;\r\nimport org.manuel.springcloud.msvc.cursos.models.User;\r\nimport org.manuel.springcloud.msvc.cursos.models.entity.Course;\r\nimport org.manuel.springcloud.msvc.cursos.services.CourseService;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.http.HttpStatus;\r\nimport org.springframework.http.ResponseEntity;\r\nimport org.springframework.validation.BindingResult;\r\nimport org.springframework.web.bind.annotation.*;\r\n\r\nimport javax.validation.Valid;\r\nimport java.util.*;\r\n\r\n@RestController\r\n@RequestMapping(\"api/v1/courses\")\r\npublic class CourseController {\r\n    @Autowired\r\n    private CourseService courseService;\r\n\r\n    @ApiOperation(value = \"Get all courses\")\r\n    @GetMapping(\"/get-all\")\r\n    public ResponseEntity<List<Course>> getAll() {\r\n        return ResponseEntity.ok(courseService.getAll());\r\n    }\r\n\r\n    @ApiOperation(value = \"Get course by ID\")\r\n    @ApiImplicitParam(value=\"Course ID to search\", name=\"id\")\r\n    @GetMapping(\"/{id}\")\r\n    public ResponseEntity<Course> getById(@PathVariable Long id) {\r\n        Optional<Course> courseId = courseService.byId(id);\r\n        /*if (courseId.isPresent()) {\r\n            return ResponseEntity.ok(courseId.get());\r\n        } else {\r\n            return ResponseEntity.notFound().build();\r\n        }*/\r\n        return courseId.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());\r\n    }\r\n\r\n    @ApiOperation(value = \"Create a course\")\r\n    @PostMapping(\"/save\")\r\n    public ResponseEntity<?> save(@Valid @RequestBody Course course, BindingResult result) {\r\n        if(result.hasErrors()){\r\n            return validate(result);\r\n        }\r\n        Course courseDB = courseService.save(course);\r\n        return ResponseEntity.status(HttpStatus.CREATED).body(courseDB);\r\n    }\r\n\r\n    @ApiOperation(value = \"Edit a course\")\r\n    @ApiImplicitParam(value=\"Course ID\", name=\"id\")\r\n    @PutMapping(\"/{id}\")\r\n    public ResponseEntity<?> editById(@Valid @RequestBody Course course, BindingResult result, @PathVariable Long id) {\r\n        if(result.hasErrors()){\r\n            return validate(result);\r\n        }\r\n        Optional<Course> courseId = courseService.byId(id);\r\n        if (courseId.isPresent()) {\r\n            Course courseDB = courseId.get();\r\n            courseDB.setName(course.getName());\r\n            return ResponseEntity.status(HttpStatus.CREATED).body(courseService.save(courseDB));\r\n        }\r\n        return ResponseEntity.notFound().build();\r\n    }\r\n\r\n    @ApiOperation(value = \"Delete a course\")\r\n    @ApiImplicitParams({\r\n            @ApiImplicitParam(value=\"Course ID\", name=\"id\")\r\n    })\r\n    @DeleteMapping(\"/delete/{id}\")\r\n    public ResponseEntity<?> deleteById(@PathVariable Long id) {\r\n        Optional<Course> courseDB = courseService.byId(id);\r\n        if (courseDB.isPresent()) {\r\n            courseService.delete(id);\r\n            return ResponseEntity.noContent().build();\r\n        }\r\n        return ResponseEntity.notFound().build();\r\n    }\r\n\r\n    @ApiOperation(value = \"Assign user to course\")\r\n    @ApiImplicitParam(value=\"Course ID\", name=\"id\")\r\n    @PutMapping(\"/assign-user/{id}\")\r\n    public ResponseEntity<?> assignUser(@Valid @RequestBody User user, @PathVariable Long id) {\r\n        Optional<User> o;\r\n        try {\r\n            o = courseService.assignUser(user, id);\r\n        }catch (FeignException e){\r\n            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap(\"message\", \"No existe el id o error de comunicacion \" + e.getMessage()));\r\n        }\r\n        if(o.isPresent()){\r\n            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());\r\n        }\r\n        return ResponseEntity.notFound().build();\r\n    }\r\n\r\n    @ApiOperation(value = \"Create user \")\r\n    @ApiImplicitParam(value=\"Course ID\", name=\"id\")\r\n    @PutMapping(\"/create-user/{id}\")\r\n    public ResponseEntity<?> createUser(@Valid @RequestBody User user, @PathVariable Long id) {\r\n        Optional<User> o;\r\n        try {\r\n            o = courseService.createUser(user, id);\r\n        }catch (FeignException e){\r\n            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap(\"message\", \"No se pudo crear el usuario o error de comunicacion \" + e.getMessage()));\r\n        }\r\n        if(o.isPresent()){\r\n            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());\r\n        }\r\n        return ResponseEntity.notFound().build();\r\n    }\r\n\r\n    @ApiOperation(value = \"Unassign user\")\r\n    @ApiImplicitParam(value=\"Course ID\", name=\"id\")\r\n    @DeleteMapping(\"/unassign-user/{id}\")\r\n    public ResponseEntity<?> unassignUser(@Valid @RequestBody User user, @PathVariable Long id) {\r\n        Optional<User> o;\r\n        try {\r\n            o = courseService.unassignUser(user, id);\r\n        }catch (FeignException e){\r\n            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap(\"message\", \"No existe el id o error de comunicacion \" + e.getMessage()));\r\n        }\r\n        if(o.isPresent()){\r\n            return ResponseEntity.status(HttpStatus.OK).body(o.get());\r\n        }\r\n        return ResponseEntity.notFound().build();\r\n    }\r\n\r\n    private ResponseEntity<Map<String, String>> validate(BindingResult result) {\r\n        Map<String, String> errores = new HashMap<>();\r\n        result.getFieldErrors().forEach(err -> {\r\n            errores.put(err.getField(), \"El campo \" + err.getField() + \" \" + err.getDefaultMessage());\r\n        });\r\n        return ResponseEntity.badRequest().body(errores);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java	(date 1660083312970)
+@@ -1,11 +1,9 @@
+ package org.manuel.springcloud.msvc.cursos.controller;
+ 
+-import feign.FeignException;
+ import io.swagger.annotations.ApiImplicitParam;
+ import io.swagger.annotations.ApiImplicitParams;
+ import io.swagger.annotations.ApiOperation;
+-import org.manuel.springcloud.msvc.cursos.models.User;
+-import org.manuel.springcloud.msvc.cursos.models.entity.Course;
++import org.manuel.springcloud.msvc.cursos.entity.Course;
+ import org.manuel.springcloud.msvc.cursos.services.CourseService;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.http.HttpStatus;
+@@ -14,7 +12,10 @@
+ import org.springframework.web.bind.annotation.*;
+ 
+ import javax.validation.Valid;
+-import java.util.*;
++import java.util.HashMap;
++import java.util.List;
++import java.util.Map;
++import java.util.Optional;
+ 
+ @RestController
+ @RequestMapping("api/v1/courses")
+@@ -80,54 +81,6 @@
+         }
+         return ResponseEntity.notFound().build();
+     }
+-
+-    @ApiOperation(value = "Assign user to course")
+-    @ApiImplicitParam(value="Course ID", name="id")
+-    @PutMapping("/assign-user/{id}")
+-    public ResponseEntity<?> assignUser(@Valid @RequestBody User user, @PathVariable Long id) {
+-        Optional<User> o;
+-        try {
+-            o = courseService.assignUser(user, id);
+-        }catch (FeignException e){
+-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("message", "No existe el id o error de comunicacion " + e.getMessage()));
+-        }
+-        if(o.isPresent()){
+-            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+-        }
+-        return ResponseEntity.notFound().build();
+-    }
+-
+-    @ApiOperation(value = "Create user ")
+-    @ApiImplicitParam(value="Course ID", name="id")
+-    @PutMapping("/create-user/{id}")
+-    public ResponseEntity<?> createUser(@Valid @RequestBody User user, @PathVariable Long id) {
+-        Optional<User> o;
+-        try {
+-            o = courseService.createUser(user, id);
+-        }catch (FeignException e){
+-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("message", "No se pudo crear el usuario o error de comunicacion " + e.getMessage()));
+-        }
+-        if(o.isPresent()){
+-            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+-        }
+-        return ResponseEntity.notFound().build();
+-    }
+-
+-    @ApiOperation(value = "Unassign user")
+-    @ApiImplicitParam(value="Course ID", name="id")
+-    @DeleteMapping("/unassign-user/{id}")
+-    public ResponseEntity<?> unassignUser(@Valid @RequestBody User user, @PathVariable Long id) {
+-        Optional<User> o;
+-        try {
+-            o = courseService.unassignUser(user, id);
+-        }catch (FeignException e){
+-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("message", "No existe el id o error de comunicacion " + e.getMessage()));
+-        }
+-        if(o.isPresent()){
+-            return ResponseEntity.status(HttpStatus.OK).body(o.get());
+-        }
+-        return ResponseEntity.notFound().build();
+-    }
+ 
+     private ResponseEntity<Map<String, String>> validate(BindingResult result) {
+         Map<String, String> errores = new HashMap<>();
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/MsvcCursosApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.manuel.springcloud.msvc.cursos;\r\n\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\nimport org.springframework.cloud.openfeign.EnableFeignClients;\r\nimport org.springframework.context.annotation.Bean;\r\nimport springfox.documentation.builders.RequestHandlerSelectors;\r\nimport springfox.documentation.spi.DocumentationType;\r\nimport springfox.documentation.spring.web.plugins.Docket;\r\nimport springfox.documentation.swagger2.annotations.EnableSwagger2;\r\n\r\n@SpringBootApplication\r\n@EnableSwagger2\r\n@EnableFeignClients\r\npublic class MsvcCursosApplication {\r\n\r\n\tpublic static void main(String[] args) {\r\n\t\tSpringApplication.run(MsvcCursosApplication.class, args);\r\n\t}\r\n\t@Bean\r\n\tpublic Docket productApi() {\r\n\t\treturn new Docket(DocumentationType.SWAGGER_2).select()\r\n\t\t\t\t.apis(RequestHandlerSelectors.basePackage(\"org.manuel.springcloud.msvc.cursos\")).build();\r\n\t}\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/MsvcCursosApplication.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/MsvcCursosApplication.java
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/MsvcCursosApplication.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/MsvcCursosApplication.java	(date 1660083312970)
+@@ -2,7 +2,6 @@
+ 
+ import org.springframework.boot.SpringApplication;
+ import org.springframework.boot.autoconfigure.SpringBootApplication;
+-import org.springframework.cloud.openfeign.EnableFeignClients;
+ import org.springframework.context.annotation.Bean;
+ import springfox.documentation.builders.RequestHandlerSelectors;
+ import springfox.documentation.spi.DocumentationType;
+@@ -11,7 +10,6 @@
+ 
+ @SpringBootApplication
+ @EnableSwagger2
+-@EnableFeignClients
+ public class MsvcCursosApplication {
+ 
+ 	public static void main(String[] args) {
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/User.java
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/User.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/User.java
+deleted file mode 100644
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/User.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ /dev/null	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
+@@ -1,44 +0,0 @@
+-package org.manuel.springcloud.msvc.cursos.models;
+-
+-public class User {
+-
+-    private Long id;
+-
+-    private String name;
+-
+-    private String email;
+-
+-    private String password;
+-
+-    public Long getId() {
+-        return id;
+-    }
+-
+-    public void setId(Long id) {
+-        this.id = id;
+-    }
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    public String getEmail() {
+-        return email;
+-    }
+-
+-    public void setEmail(String email) {
+-        this.email = email;
+-    }
+-
+-    public String getPassword() {
+-        return password;
+-    }
+-
+-    public void setPassword(String password) {
+-        this.password = password;
+-    }
+-}
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/CourseUser.java
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/CourseUser.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/CourseUser.java
+deleted file mode 100644
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/CourseUser.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ /dev/null	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
+@@ -1,42 +0,0 @@
+-package org.manuel.springcloud.msvc.cursos.models.entity;
+-
+-import javax.persistence.*;
+-
+-@Entity
+-@Table(name = "courses_users")
+-public class CourseUser {
+-    @Id
+-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+-    private Long id;
+-
+-    @Column(name="user_id", unique = true)
+-    private Long userID;
+-
+-    public Long getId() {
+-        return id;
+-    }
+-
+-    public void setId(Long id) {
+-        this.id = id;
+-    }
+-
+-    public Long getUserID() {
+-        return userID;
+-    }
+-
+-    public void setUserID(Long userID) {
+-        this.userID = userID;
+-    }
+-
+-    @Override
+-    public boolean equals(Object obj) {
+-        if(this == obj){
+-            return true;
+-        }
+-        if (!(obj instanceof CourseUser)){
+-            return false;
+-        }
+-        CourseUser o = (CourseUser) obj;
+-        return this.userID != null && this.userID.equals(o.userID);
+-    }
+-}
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/Course.java
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/Course.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/Course.java
+deleted file mode 100644
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/Course.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ /dev/null	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
+@@ -1,72 +0,0 @@
+-package org.manuel.springcloud.msvc.cursos.models.entity;
+-
+-import org.manuel.springcloud.msvc.cursos.models.User;
+-
+-import javax.persistence.*;
+-import javax.validation.constraints.NotEmpty;
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-@Entity
+-@Table(name = "courses")
+-public class Course {
+-    @Id
+-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+-    private Long id;
+-
+-    @NotEmpty
+-    @Column(nullable = false)
+-    private String name;
+-
+-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+-    @JoinColumn(name = "course_id")
+-    private List<CourseUser> courseUsers;
+-
+-    @Transient
+-    private List<User> users;
+-
+-    public Course() {
+-        courseUsers = new ArrayList<>();
+-        users = new ArrayList<>();
+-    }
+-
+-    public Long getId() {
+-        return id;
+-    }
+-
+-    public void setId(Long id) {
+-        this.id = id;
+-    }
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    public void addCourseUser(CourseUser courseUser) {
+-        courseUsers.add(courseUser);
+-    }
+-
+-    public void removeCourseUser(CourseUser courseUser) {
+-        courseUsers.remove(courseUser);
+-    }
+-
+-    public List<CourseUser> getCourseUsers() {
+-        return courseUsers;
+-    }
+-
+-    public void setCourseUsers(List<CourseUser> courseUsers) {
+-        this.courseUsers = courseUsers;
+-    }
+-
+-    public List<User> getUsers() {
+-        return users;
+-    }
+-
+-    public void setUsers(List<User> users) {
+-        this.users = users;
+-    }
+-}
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java
+deleted file mode 100644
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ /dev/null	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
+@@ -1,20 +0,0 @@
+-package org.manuel.springcloud.msvc.cursos.clients;
+-
+-import org.manuel.springcloud.msvc.cursos.models.User;
+-import org.springframework.cloud.openfeign.FeignClient;
+-import org.springframework.web.bind.annotation.GetMapping;
+-import org.springframework.web.bind.annotation.PathVariable;
+-import org.springframework.web.bind.annotation.PostMapping;
+-import org.springframework.web.bind.annotation.RequestBody;
+-
+-import javax.validation.Valid;
+-
+-@FeignClient(name = "msvc-usuarios", url="localhost:8001")
+-public interface UserClientRest {
+-
+-    @GetMapping("/api/v1/users/{id}")
+-    User userById(@PathVariable Long id);
+-
+-    @PostMapping("/api/v1/users/save")
+-    User createUser(@Valid @RequestBody User user);
+-}
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/repositories/CourseRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.manuel.springcloud.msvc.cursos.repositories;\r\n\r\nimport org.manuel.springcloud.msvc.cursos.models.entity.Course;\r\nimport org.springframework.data.repository.CrudRepository;\r\n\r\npublic interface CourseRepository extends CrudRepository<Course, Long> {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/repositories/CourseRepository.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/repositories/CourseRepository.java
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/repositories/CourseRepository.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/repositories/CourseRepository.java	(date 1660083312970)
+@@ -1,6 +1,6 @@
+ package org.manuel.springcloud.msvc.cursos.repositories;
+ 
+-import org.manuel.springcloud.msvc.cursos.models.entity.Course;
++import org.manuel.springcloud.msvc.cursos.entity.Course;
+ import org.springframework.data.repository.CrudRepository;
+ 
+ public interface CourseRepository extends CrudRepository<Course, Long> {
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.manuel.springcloud.msvc.cursos.services;\r\n\r\nimport org.manuel.springcloud.msvc.cursos.clients.UserClientRest;\r\nimport org.manuel.springcloud.msvc.cursos.models.User;\r\nimport org.manuel.springcloud.msvc.cursos.models.entity.Course;\r\nimport org.manuel.springcloud.msvc.cursos.models.entity.CourseUser;\r\nimport org.manuel.springcloud.msvc.cursos.repositories.CourseRepository;\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Service;\r\nimport org.springframework.transaction.annotation.Transactional;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\n@Service\r\npublic class CourseServiceImpl implements CourseService {\r\n    @Autowired\r\n    private CourseRepository courseRepository;\r\n    @Autowired\r\n    private UserClientRest userClientRest;\r\n\r\n    @Override\r\n    @Transactional(readOnly = true)\r\n    public List<Course> getAll() {\r\n        return (List<Course>) courseRepository.findAll();\r\n    }\r\n\r\n    @Override\r\n    @Transactional(readOnly = true)\r\n    public Optional<Course> byId(Long id) {\r\n        return courseRepository.findById(id);\r\n    }\r\n\r\n    @Override\r\n    @Transactional\r\n    public Course save(Course course) {\r\n        return courseRepository.save(course);\r\n    }\r\n\r\n    @Override\r\n    @Transactional\r\n    public void delete(Long id) {\r\n        courseRepository.deleteById(id);\r\n    }\r\n\r\n    @Override\r\n    @Transactional\r\n    public Optional<User> assignUser(User user, Long courseId) {\r\n        Optional<Course> courseDB = courseRepository.findById(courseId);\r\n        if (courseDB.isPresent()) {\r\n            User userMsvc = userClientRest.userById(user.getId());\r\n\r\n            Course course = courseDB.get();\r\n            CourseUser courseUser = new CourseUser();\r\n            courseUser.setUserID(userMsvc.getId());\r\n\r\n            course.addCourseUser(courseUser);\r\n            courseRepository.save(course);\r\n            return Optional.of(userMsvc);\r\n        }\r\n        return Optional.empty();\r\n    }\r\n\r\n    @Override\r\n    @Transactional\r\n    public Optional<User> createUser(User user, Long courseId) {\r\n        Optional<Course> courseDB = courseRepository.findById(courseId);\r\n        if (courseDB.isPresent()) {\r\n            User newUserMsvc = userClientRest.createUser(user);\r\n\r\n            Course course = courseDB.get();\r\n            CourseUser courseUser = new CourseUser();\r\n            courseUser.setUserID(newUserMsvc.getId());\r\n\r\n            course.addCourseUser(courseUser);\r\n            courseRepository.save(course);\r\n            return Optional.of(newUserMsvc);\r\n        }\r\n        return Optional.empty();\r\n    }\r\n\r\n    @Override\r\n    @Transactional\r\n    public Optional<User> unassignUser(User user, Long courseId) {\r\n        Optional<Course> courseDB = courseRepository.findById(courseId);\r\n        if (courseDB.isPresent()) {\r\n            User userMsvc = userClientRest.userById(user.getId());\r\n\r\n            Course course = courseDB.get();\r\n            CourseUser courseUser = new CourseUser();\r\n            courseUser.setUserID(userMsvc.getId());\r\n\r\n            course.removeCourseUser(courseUser);\r\n            courseRepository.save(course);\r\n            return Optional.of(userMsvc);\r\n        }\r\n        return Optional.empty();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseServiceImpl.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseServiceImpl.java
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseServiceImpl.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseServiceImpl.java	(date 1660083312972)
+@@ -1,9 +1,6 @@
+ package org.manuel.springcloud.msvc.cursos.services;
+ 
+-import org.manuel.springcloud.msvc.cursos.clients.UserClientRest;
+-import org.manuel.springcloud.msvc.cursos.models.User;
+-import org.manuel.springcloud.msvc.cursos.models.entity.Course;
+-import org.manuel.springcloud.msvc.cursos.models.entity.CourseUser;
++import org.manuel.springcloud.msvc.cursos.entity.Course;
+ import org.manuel.springcloud.msvc.cursos.repositories.CourseRepository;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Service;
+@@ -13,11 +10,9 @@
+ import java.util.Optional;
+ 
+ @Service
+-public class CourseServiceImpl implements CourseService {
++public class CourseServiceImpl implements CourseService{
+     @Autowired
+     private CourseRepository courseRepository;
+-    @Autowired
+-    private UserClientRest userClientRest;
+ 
+     @Override
+     @Transactional(readOnly = true)
+@@ -42,58 +37,4 @@
+     public void delete(Long id) {
+         courseRepository.deleteById(id);
+     }
+-
+-    @Override
+-    @Transactional
+-    public Optional<User> assignUser(User user, Long courseId) {
+-        Optional<Course> courseDB = courseRepository.findById(courseId);
+-        if (courseDB.isPresent()) {
+-            User userMsvc = userClientRest.userById(user.getId());
+-
+-            Course course = courseDB.get();
+-            CourseUser courseUser = new CourseUser();
+-            courseUser.setUserID(userMsvc.getId());
+-
+-            course.addCourseUser(courseUser);
+-            courseRepository.save(course);
+-            return Optional.of(userMsvc);
+-        }
+-        return Optional.empty();
+-    }
+-
+-    @Override
+-    @Transactional
+-    public Optional<User> createUser(User user, Long courseId) {
+-        Optional<Course> courseDB = courseRepository.findById(courseId);
+-        if (courseDB.isPresent()) {
+-            User newUserMsvc = userClientRest.createUser(user);
+-
+-            Course course = courseDB.get();
+-            CourseUser courseUser = new CourseUser();
+-            courseUser.setUserID(newUserMsvc.getId());
+-
+-            course.addCourseUser(courseUser);
+-            courseRepository.save(course);
+-            return Optional.of(newUserMsvc);
+-        }
+-        return Optional.empty();
+-    }
+-
+-    @Override
+-    @Transactional
+-    public Optional<User> unassignUser(User user, Long courseId) {
+-        Optional<Course> courseDB = courseRepository.findById(courseId);
+-        if (courseDB.isPresent()) {
+-            User userMsvc = userClientRest.userById(user.getId());
+-
+-            Course course = courseDB.get();
+-            CourseUser courseUser = new CourseUser();
+-            courseUser.setUserID(userMsvc.getId());
+-
+-            course.removeCourseUser(courseUser);
+-            courseRepository.save(course);
+-            return Optional.of(userMsvc);
+-        }
+-        return Optional.empty();
+-    }
+ }
+Index: msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.manuel.springcloud.msvc.cursos.services;\r\n\r\nimport org.manuel.springcloud.msvc.cursos.models.User;\r\nimport org.manuel.springcloud.msvc.cursos.models.entity.Course;\r\n\r\nimport java.util.List;\r\nimport java.util.Optional;\r\n\r\npublic interface CourseService {\r\n    List<Course> getAll();\r\n    Optional<Course> byId(Long id);\r\n    Course save(Course course);\r\n    void delete(Long id);\r\n    Optional<User> assignUser(User user, Long courseId);\r\n    Optional<User> createUser(User user, Long courseId);\r\n    Optional<User> unassignUser(User user, Long courseId);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseService.java b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseService.java
+--- a/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseService.java	(revision cf53a5e96899cae092f1053460bbb468ab59c2cb)
++++ b/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseService.java	(date 1660083312972)
+@@ -1,7 +1,6 @@
+ package org.manuel.springcloud.msvc.cursos.services;
+ 
+-import org.manuel.springcloud.msvc.cursos.models.User;
+-import org.manuel.springcloud.msvc.cursos.models.entity.Course;
++import org.manuel.springcloud.msvc.cursos.entity.Course;
+ 
+ import java.util.List;
+ import java.util.Optional;
+@@ -11,7 +10,4 @@
+     Optional<Course> byId(Long id);
+     Course save(Course course);
+     void delete(Long id);
+-    Optional<User> assignUser(User user, Long courseId);
+-    Optional<User> createUser(User user, Long courseId);
+-    Optional<User> unassignUser(User user, Long courseId);
+ }
