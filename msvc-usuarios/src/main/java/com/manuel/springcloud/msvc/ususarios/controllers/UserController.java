@@ -2,6 +2,9 @@ package com.manuel.springcloud.msvc.ususarios.controllers;
 
 import com.manuel.springcloud.msvc.ususarios.models.entity.User;
 import com.manuel.springcloud.msvc.ususarios.services.UserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,65 +20,97 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private UserService getUserService() {
+        return this.userService;
+    }
+
+    @ApiOperation(value = "URL for get all users.")
+    @ApiResponse(code = 200, message = "OK")
     @GetMapping("/get-all")
     public List<User> getAll() {
-        return userService.getAll();
+        return getUserService().getAll();
     }
 
+    @ApiOperation(value = "URL for get user by ID.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 404, message = "User not found.")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<?> userById(@PathVariable Long id) {
-        Optional<User> user = userService.byId(id);
+        Optional<User> user = getUserService().byId(id);
         if (user.isPresent()) {
-            //return  ResponseEntity.ok().body(user.get());
             return ResponseEntity.ok(user.get());
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found.");
         }
     }
 
+    @ApiOperation(value = "URL for create user.")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "User created successfully."),
+            @ApiResponse(code = 400, message = "E-mail can't be empty or it already exists.")
+    })
     @PostMapping("/save")
-    //@ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return validate(result);
         }
-        if(!user.getEmail().isEmpty() && userService.existsByEmail(user.getEmail())){
-            return ResponseEntity.badRequest()
-                    .body(Collections
-                            .singletonMap("message", "Ya existe ese correo electronico")
-                    );
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> editUser(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
-        if(result.hasErrors()){
-            return validate(result);
-        }
-        Optional<User> userId = userService.byId(id);
-        if (userId.isPresent()) {
-            User userDB = userId.get();
-            if(!user.getEmail().isEmpty()
-                    && !user.getEmail().equalsIgnoreCase(userDB.getEmail())
-                    && userService.byEmail(user.getEmail()).isPresent()){
+        if (!user.getEmail().isEmpty()) {
+            if (!getUserService().existsByEmail(user.getEmail())) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(getUserService().save(user));
+            } else {
                 return ResponseEntity.badRequest()
                         .body(Collections
-                                .singletonMap("message", "Ya existe ese correo electronico")
+                                .singletonMap("message", "E-mail already exists.")
                         );
             }
-            userDB.setName(user.getName());
-            userDB.setEmail(user.getEmail());
-            userDB.setPassword(user.getPassword());
-            return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDB));
+        } else {
+            return ResponseEntity.badRequest().body("E-mail can't be empty.");
         }
-        return ResponseEntity.notFound().build();
     }
 
+    @ApiOperation(value = "URL for edit an user.")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "User edited successfully."),
+            @ApiResponse(code = 400, message = "E-mail can't be empty or it already exists."),
+            @ApiResponse(code = 404, message = "User not found.")
+    })
+    @PutMapping("/{id}")
+    public ResponseEntity<?> editUser(@Valid @RequestBody User user, BindingResult result, @PathVariable Long id) {
+        if (result.hasErrors()) {
+            return validate(result);
+        }
+        Optional<User> userId = getUserService().byId(id);
+        if (userId.isPresent()) {
+            User userDB = userId.get();
+            if (user.getEmail().isEmpty()){
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("E-mail can't be empty.");
+            }else{
+                if(getUserService().byEmail(user.getEmail()).isPresent()){
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("E-mail already exists.");
+                }else {
+                    userDB.setName(user.getName());
+                    userDB.setEmail(user.getEmail());
+                    userDB.setPassword(user.getPassword());
+                    return ResponseEntity.status(HttpStatus.CREATED).body(getUserService().save(userDB));
+                }
+
+            }
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+    @ApiOperation(value = "URL for delete a user.")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "User deleted successfully."),
+            @ApiResponse(code = 404, message = "User not found.")
+    })
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Long id){
-        Optional<User> userId = userService.byId(id);
-        if(userId.isPresent()){
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        Optional<User> userId = getUserService().byId(id);
+        if (userId.isPresent()) {
             userService.delete(userId.get().getId());
             return ResponseEntity.noContent().build();
         }
@@ -83,10 +118,10 @@ public class UserController {
     }
 
     private ResponseEntity<Map<String, String>> validate(BindingResult result) {
-        Map<String, String> errores = new HashMap<>();
+        Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err -> {
-            errores.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
+            errors.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
         });
-        return ResponseEntity.badRequest().body(errores);
+        return ResponseEntity.badRequest().body(errors);
     }
 }
