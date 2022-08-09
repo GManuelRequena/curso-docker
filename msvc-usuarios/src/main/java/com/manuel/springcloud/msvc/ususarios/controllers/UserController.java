@@ -84,12 +84,12 @@ public class UserController {
         Optional<User> userId = getUserService().byId(id);
         if (userId.isPresent()) {
             User userDB = userId.get();
-            if (user.getEmail().isEmpty()){
+            if (user.getEmail().isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("E-mail can't be empty.");
-            }else{
-                if(getUserService().byEmail(user.getEmail()).isPresent()){
+            } else {
+                if (getUserService().byEmail(user.getEmail()).isPresent()) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("E-mail already exists.");
-                }else {
+                } else {
                     userDB.setName(user.getName());
                     userDB.setEmail(user.getEmail());
                     userDB.setPassword(user.getPassword());
@@ -97,7 +97,7 @@ public class UserController {
                 }
 
             }
-        }else{
+        } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
     }
@@ -115,6 +115,19 @@ public class UserController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @ApiOperation(value = "URL for get all users by ID.")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Users retrieved."),
+            @ApiResponse(code = 404, message = "Users not found.")
+    })
+    @GetMapping("/users-by-course")
+    public ResponseEntity<?> getUsersByCourse(@RequestParam List<Long> ids) {
+        {
+            return new ResponseEntity<>(getUserService().getAllById(ids), HttpStatus.OK);
+        }
+
     }
 
     private ResponseEntity<Map<String, String>> validate(BindingResult result) {

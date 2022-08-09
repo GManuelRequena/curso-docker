@@ -14,10 +14,14 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    private UserRepository getUserRepository(){
+        return this.userRepository;
+    }
+
     @Override
     @Transactional(readOnly = true)
     public List<User> getAll() {
-        return (List<User>) userRepository.findAll();
+        return (List<User>) getUserRepository().findAll();
     }
 
     @Override
@@ -29,26 +33,31 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public User save(User user) {
-        return userRepository.save(user);
+        return getUserRepository().save(user);
     }
 
     @Override
     @Transactional
     public void delete(Long id) {
-        userRepository.deleteById(id);
+        getUserRepository().deleteById(id);
     }
 
     @Override
     public Optional<User> byEmail(String email) {
-        return userRepository.findByEmail(email);
+        return getUserRepository().findByEmail(email);
     }
     @Override
     public Optional<User> porEmail(String email){
-        return userRepository.porEmail(email);
+        return getUserRepository().porEmail(email);
     }
 
     @Override
     public boolean existsByEmail(String email) {
-        return userRepository.existsByEmail(email);
+        return getUserRepository().existsByEmail(email);
+    }
+
+    @Override
+    public List<User> getAllById(Iterable<Long> ids) {
+        return (List<User>) getUserRepository().findAllById(ids);
     }
 }
