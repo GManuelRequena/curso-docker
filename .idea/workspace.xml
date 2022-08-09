@@ -4,33 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Swagger and Stuff">
-      <change afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/Course.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/models/entity/CourseUser.java" afterDir="false" />
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Validation">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-cursos/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/MsvcCursosApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/MsvcCursosApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/controller/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/entity/Course.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/repositories/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/repositories/CourseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/services/CourseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/MsvcUsuariosApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/MsvcUsuariosApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/models/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/models/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/services/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/services/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -187,14 +187,7 @@
       <option name="project" value="LOCAL" />
       <updated>1659810198634</updated>
     </task>
-    <task id="LOCAL-00011" summary="Swagger and Stuff">
-      <created>1659830755556</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1659830755556</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -226,7 +219,6 @@
     <MESSAGE value="Creation UserRepository.java" />
     <MESSAGE value="Course" />
     <MESSAGE value="Validation" />
-    <MESSAGE value="Swagger and Stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Swagger and Stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validation" />
   </component>
 </project>
