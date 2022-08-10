@@ -25,7 +25,7 @@ public class SpringFoxConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "Users API",
+                "Courses API",
                 "Some custom description of API.",
                 "API TOS",
                 "Terms of service",

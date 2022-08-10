@@ -29,22 +29,17 @@ public class CourseController {
     }
 
     @ApiOperation(value = "Get course by ID")
-    @ApiImplicitParam(value="Course ID to search", name="id")
+    @ApiImplicitParam(value = "Course ID to search", name = "id")
     @GetMapping("/{id}")
     public ResponseEntity<Course> getById(@PathVariable Long id) {
-        Optional<Course> courseId = courseService.byId(id);
-        /*if (courseId.isPresent()) {
-            return ResponseEntity.ok(courseId.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }*/
+        Optional<Course> courseId = courseService.byIdWithUsers(id);
         return courseId.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @ApiOperation(value = "Create a course")
     @PostMapping("/save")
     public ResponseEntity<?> save(@Valid @RequestBody Course course, BindingResult result) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return validate(result);
         }
         Course courseDB = courseService.save(course);
@@ -52,10 +47,10 @@ public class CourseController {
     }
 
     @ApiOperation(value = "Edit a course")
-    @ApiImplicitParam(value="Course ID", name="id")
+    @ApiImplicitParam(value = "Course ID", name = "id")
     @PutMapping("/{id}")
     public ResponseEntity<?> editById(@Valid @RequestBody Course course, BindingResult result, @PathVariable Long id) {
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return validate(result);
         }
         Optional<Course> courseId = courseService.byId(id);
@@ -69,7 +64,7 @@ public class CourseController {
 
     @ApiOperation(value = "Delete a course")
     @ApiImplicitParams({
-            @ApiImplicitParam(value="Course ID", name="id")
+            @ApiImplicitParam(value = "Course ID", name = "id")
     })
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable Long id) {
@@ -82,48 +77,48 @@ public class CourseController {
     }
 
     @ApiOperation(value = "Assign user to course")
-    @ApiImplicitParam(value="Course ID", name="id")
+    @ApiImplicitParam(value = "Course ID", name = "id")
     @PutMapping("/assign-user/{id}")
     public ResponseEntity<?> assignUser(@Valid @RequestBody User user, @PathVariable Long id) {
         Optional<User> o;
         try {
             o = courseService.assignUser(user, id);
-        }catch (FeignException e){
+        } catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("message", "No existe el id o error de comunicacion " + e.getMessage()));
         }
-        if(o.isPresent()){
+        if (o.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
         }
         return ResponseEntity.notFound().build();
     }
 
     @ApiOperation(value = "Create user ")
-    @ApiImplicitParam(value="Course ID", name="id")
+    @ApiImplicitParam(value = "Course ID", name = "id")
     @PutMapping("/create-user/{id}")
     public ResponseEntity<?> createUser(@Valid @RequestBody User user, @PathVariable Long id) {
         Optional<User> o;
         try {
             o = courseService.createUser(user, id);
-        }catch (FeignException e){
+        } catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("message", "No se pudo crear el usuario o error de comunicacion " + e.getMessage()));
         }
-        if(o.isPresent()){
+        if (o.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
         }
         return ResponseEntity.notFound().build();
     }
 
     @ApiOperation(value = "Unassign user")
-    @ApiImplicitParam(value="Course ID", name="id")
+    @ApiImplicitParam(value = "Course ID", name = "id")
     @DeleteMapping("/unassign-user/{id}")
     public ResponseEntity<?> unassignUser(@Valid @RequestBody User user, @PathVariable Long id) {
         Optional<User> o;
         try {
             o = courseService.unassignUser(user, id);
-        }catch (FeignException e){
+        } catch (FeignException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("message", "No existe el id o error de comunicacion " + e.getMessage()));
         }
-        if(o.isPresent()){
+        if (o.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(o.get());
         }
         return ResponseEntity.notFound().build();
