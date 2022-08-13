@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@FeignClient(name = "msvc-usuarios", url="localhost:8001")
+@FeignClient(name = "msvc-usuarios", url="localhost:8001/api/v1/users")
 public interface UserClientRest {
 
-    @GetMapping("/api/v1/users/{id}")
+    @GetMapping("/{id}")
     User userById(@PathVariable Long id);
 
-    @PostMapping("/api/v1/users/save")
+    @PostMapping("/save")
     User createUser(@Valid @RequestBody User user);
 
-    @GetMapping("/api/v1/users/users-by-course")
+    @GetMapping("/users-by-course")
     List<User> getUsersByCourse(@RequestParam Iterable<Long> ids);
 }
