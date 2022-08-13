@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Refactor CourseClientRest">
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Refactor Dockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" afterDir="false" />
     </list>
@@ -277,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660429846557</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Refactor Dockerfile">
+      <created>1660430971370</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1660430971370</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -317,6 +324,7 @@
     <MESSAGE value="workspace modified" />
     <MESSAGE value="Refactor UserClientRest" />
     <MESSAGE value="Refactor CourseClientRest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor CourseClientRest" />
+    <MESSAGE value="Refactor Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor Dockerfile" />
   </component>
 </project>
