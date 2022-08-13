@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="End MSVCs">
-      <change afterPath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" afterDir="false" />
-    </list>
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Adding Docker" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +84,7 @@
       <recent name="org.manuel.springcloud.msvc.cursos.configs" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.msvc-usuarios [clean]">
+  <component name="RunManager" selected="Application.MsvcCursosApplication">
     <configuration name="MsvcCursosApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.manuel.springcloud.msvc.cursos.MsvcCursosApplication" />
       <module name="msvc-cursos" />
@@ -142,9 +138,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Maven.msvc-usuarios [clean]" />
-        <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Application.MsvcCursosApplication" />
+        <item itemvalue="Application.MsvcUsuariosApplication" />
+        <item itemvalue="Maven.msvc-usuarios [clean]" />
         <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Application.MsvcCursosApplication" />
       </list>
@@ -250,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660181182149</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Adding Docker">
+      <created>1660428493408</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1660428493408</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -286,6 +289,7 @@
     <MESSAGE value="Refactoring msvc_user" />
     <MESSAGE value="Refactoring msvc_course" />
     <MESSAGE value="End MSVCs" />
-    <option name="LAST_COMMIT_MESSAGE" value="End MSVCs" />
+    <MESSAGE value="Adding Docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Docker" />
   </component>
 </project>
