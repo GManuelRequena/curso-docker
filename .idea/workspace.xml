@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="workspace modified">
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Refactor CourseClientRest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +263,21 @@
       <option name="project" value="LOCAL" />
       <updated>1660428749801</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Refactor UserClientRest">
+      <created>1660429811250</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1660429811250</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Refactor CourseClientRest">
+      <created>1660429846557</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1660429846557</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -301,6 +315,8 @@
     <MESSAGE value="End MSVCs" />
     <MESSAGE value="Adding Docker" />
     <MESSAGE value="workspace modified" />
-    <option name="LAST_COMMIT_MESSAGE" value="workspace modified" />
+    <MESSAGE value="Refactor UserClientRest" />
+    <MESSAGE value="Refactor CourseClientRest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor CourseClientRest" />
   </component>
 </project>
