@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Refactor Dockerfile">
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Improved Dockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/controllers/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660432671029</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Improved Dockerfile">
+      <created>1660434400216</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1660434400216</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,6 +339,7 @@
     <MESSAGE value="Refactor UserClientRest" />
     <MESSAGE value="Refactor CourseClientRest" />
     <MESSAGE value="Refactor Dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor Dockerfile" />
+    <MESSAGE value="Improved Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved Dockerfile" />
   </component>
 </project>
