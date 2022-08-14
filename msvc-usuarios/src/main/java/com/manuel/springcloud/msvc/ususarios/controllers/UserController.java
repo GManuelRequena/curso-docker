@@ -49,7 +49,7 @@ public class UserController {
     @ApiOperation(value = "URL for create user.")
     @ApiResponses({
             @ApiResponse(code = 201, message = "User created successfully."),
-            @ApiResponse(code = 400, message = "E-mail can not be empty or it already exists.")
+            @ApiResponse(code = 400, message = "E-mail can't be empty or it already exists.")
     })
     @PostMapping("/save")
     public ResponseEntity<?> createUser(@Valid @RequestBody User user, BindingResult result) {
