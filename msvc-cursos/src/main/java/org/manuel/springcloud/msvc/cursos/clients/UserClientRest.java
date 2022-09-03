@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@FeignClient(name = "msvc-usuarios", url="localhost:8001/api/v1/users")
+//@FeignClient(name = "msvc-usuarios", url="localhost:8001/api/v1/users")
+//The second one is because in that way the url points to the msvc-usuarios container
+@FeignClient(name="msvc-usuarios", url="msvc-usuarios:8001/api/v1/users")
 public interface UserClientRest {
 
     @GetMapping("/{id}")
