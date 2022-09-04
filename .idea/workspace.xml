@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Adding more about Docker">
-      <change afterPath="$PROJECT_DIR$/CreateMSSQLContainer.ps1" afterDir="false" />
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="DockerCommands Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DockerCommands.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DockerCommands.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +91,7 @@
       <recent name="org.manuel.springcloud.msvc.cursos.configs" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.msvc-usuarios/Dockerfile builder">
+  <component name="RunManager" selected="Application.MsvcUsuariosApplication">
     <configuration name="MsvcCursosApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.manuel.springcloud.msvc.cursos.MsvcCursosApplication" />
       <module name="msvc-cursos" />
@@ -157,9 +157,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Docker.msvc-usuarios/Dockerfile builder" />
         <item itemvalue="Application.MsvcCursosApplication" />
-        <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Maven.msvc-usuarios [clean]" />
         <item itemvalue="Application.MsvcUsuariosApplication" />
       </list>
@@ -342,7 +342,21 @@
       <option name="project" value="LOCAL" />
       <updated>1662243814994</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="PowerShell Script for MSSQL">
+      <created>1662308310739</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1662308310739</updated>
+    </task>
+    <task id="LOCAL-00026" summary="DockerCommands Update">
+      <created>1662308332392</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1662308332392</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -385,6 +399,8 @@
     <MESSAGE value="Refactor Dockerfile" />
     <MESSAGE value="Improved Dockerfile" />
     <MESSAGE value="Adding more about Docker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding more about Docker" />
+    <MESSAGE value="PowerShell Script for MSSQL" />
+    <MESSAGE value="DockerCommands Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="DockerCommands Update" />
   </component>
 </project>
