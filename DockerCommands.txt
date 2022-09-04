@@ -9,12 +9,13 @@ docker network create spring
 
 --Create Container for MSSQL and database
 Port 1434 is for conecting from my pc
- docker run -d -p 1434:1433 --name mssql --network spring -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD="Sasa2032" -e MSSQL_TCP_PORT=1433 mcr.microsoft.com/mssql/server
+ docker run -d -p 1434:1433 --name mssql --network spring -e ACCEPT_EULA=Y -e MSSQL_SA_PASSWORD="Sasa2032" -e MSSQL_TCP_PORT=1433 -v data-mssql:/var/lib/mssql --restart=always mcr.microsoft.com/mssql/server
  docker exec -it mssql "bash"
  /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'Sasa2032' -Q 'create database msvc_usuarios'
---Create Container for MSSQL
+
+--Create Container for Postgres14
 Port 5532 is for conecting from my pc
- docker run -d -p 5532:5432 --name postgres14 --network spring -e POSTGRES_PASSWORD=sasa2032 -e POSTGRES_DB=msvc_cursos postgres:14-alpine
+ docker run -d -p 5532:5432 --name postgres14 --network spring -e POSTGRES_PASSWORD=sasa2032 -e POSTGRES_DB=msvc_cursos -v data-postgres:/var/lib/postgresql/data --restart=always postgres:14-alpine
 
 --Create container for usuarios
  docker run -p 8001:8001 -d --rm --name msvc-usuarios --network spring usuarios
