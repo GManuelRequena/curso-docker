@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/msvc-usuarios/.env" afterDir="false" />
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Adding .env file with environmental variables for docker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/.env" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +91,7 @@
       <recent name="org.manuel.springcloud.msvc.cursos.configs" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MsvcUsuariosApplication">
+  <component name="RunManager" selected="Docker.msvc-usuarios/Dockerfile builder">
     <configuration name="MsvcCursosApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.manuel.springcloud.msvc.cursos.MsvcCursosApplication" />
       <module name="msvc-cursos" />
@@ -158,8 +157,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Docker.msvc-usuarios/Dockerfile builder" />
+        <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Application.MsvcCursosApplication" />
         <item itemvalue="Maven.msvc-usuarios [clean]" />
         <item itemvalue="Application.MsvcUsuariosApplication" />
@@ -371,7 +370,21 @@
       <option name="project" value="LOCAL" />
       <updated>1662330687008</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Adding .env file with environmental variables for docker">
+      <created>1662912349277</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1662912349277</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Adding .env file with environmental variables for docker">
+      <created>1662912425089</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1662912425089</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -417,6 +430,7 @@
     <MESSAGE value="PowerShell Script for MSSQL" />
     <MESSAGE value="DockerCommands Update" />
     <MESSAGE value="Using MySQL 8 instead of MSSQL" />
-    <option name="LAST_COMMIT_MESSAGE" value="Using MySQL 8 instead of MSSQL" />
+    <MESSAGE value="Adding .env file with environmental variables for docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding .env file with environmental variables for docker" />
   </component>
 </project>
