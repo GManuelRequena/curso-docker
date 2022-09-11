@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Update .env and Dockerfile">
-      <change afterPath="$PROJECT_DIR$/msvc-cursos/.env" afterDir="false" />
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Update .env and Dockerfile for both msvc">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-cursos/.env" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-usuarios/.env" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/client/CourseClientRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/client/CourseClientRest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -393,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662919591918</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Update .env and Dockerfile for both msvc">
+      <created>1662920264501</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1662920264501</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -441,6 +450,7 @@
     <MESSAGE value="Using MySQL 8 instead of MSSQL" />
     <MESSAGE value="Adding .env file with environmental variables for docker" />
     <MESSAGE value="Update .env and Dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update .env and Dockerfile" />
+    <MESSAGE value="Update .env and Dockerfile for both msvc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update .env and Dockerfile for both msvc" />
   </component>
 </project>
