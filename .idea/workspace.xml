@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Adding .env file with environmental variables for docker">
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Update .env and Dockerfile">
+      <change afterPath="$PROJECT_DIR$/msvc-cursos/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/msvc-usuarios/.env" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -384,7 +386,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662912425089</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Update .env and Dockerfile">
+      <created>1662919591918</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1662919591918</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -431,6 +440,7 @@
     <MESSAGE value="DockerCommands Update" />
     <MESSAGE value="Using MySQL 8 instead of MSSQL" />
     <MESSAGE value="Adding .env file with environmental variables for docker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding .env file with environmental variables for docker" />
+    <MESSAGE value="Update .env and Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update .env and Dockerfile" />
   </component>
 </project>
