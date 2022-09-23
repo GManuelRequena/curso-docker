@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Update .env and Dockerfile for both msvc">
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Update of DockerCommands.txt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/.env" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/java/org/manuel/springcloud/msvc/cursos/clients/UserClientRest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-cursos/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-usuarios/.env" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/client/CourseClientRest.java" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/java/com/manuel/springcloud/msvc/ususarios/client/CourseClientRest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/msvc-usuarios/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DockerCommands.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DockerCommands.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="cf53a5e96899cae092f1053460bbb468ab59c2cb" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,7 +91,7 @@
       <recent name="org.manuel.springcloud.msvc.cursos.configs" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.msvc-usuarios/Dockerfile builder">
+  <component name="RunManager" selected="Docker.docker-compose.yml.postgres14: Compose Deployment">
     <configuration name="MsvcCursosApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.manuel.springcloud.msvc.cursos.MsvcCursosApplication" />
       <module name="msvc-cursos" />
@@ -147,6 +143,19 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.postgres14: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres14" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="msvc-usuarios/Dockerfile builder" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -161,11 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.postgres14: Compose Deployment" />
         <item itemvalue="Docker.msvc-usuarios/Dockerfile builder" />
         <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Application.MsvcCursosApplication" />
         <item itemvalue="Maven.msvc-usuarios [clean]" />
-        <item itemvalue="Application.MsvcUsuariosApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -402,7 +411,35 @@
       <option name="project" value="LOCAL" />
       <updated>1662920264501</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Update .env and Dockerfile for both msvc">
+      <created>1662921704569</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1662921704569</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Creation of docker-compose.yml">
+      <created>1663543504068</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1663543504068</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Update of docker-compose.yml so that it can build images if they are not built">
+      <created>1663544108621</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1663544108621</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Update of DockerCommands.txt">
+      <created>1663935208688</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1663935208688</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -416,7 +453,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="push_images_docker_hub" />
                       </list>
                     </value>
                   </entry>
@@ -451,6 +488,9 @@
     <MESSAGE value="Adding .env file with environmental variables for docker" />
     <MESSAGE value="Update .env and Dockerfile" />
     <MESSAGE value="Update .env and Dockerfile for both msvc" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update .env and Dockerfile for both msvc" />
+    <MESSAGE value="Creation of docker-compose.yml" />
+    <MESSAGE value="Update of docker-compose.yml so that it can build images if they are not built" />
+    <MESSAGE value="Update of DockerCommands.txt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update of DockerCommands.txt" />
   </component>
 </project>

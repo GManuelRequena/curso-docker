@@ -21,12 +21,26 @@ Port 1434 is for conecting from my pc
 
 --Create Container for Postgres14
 Port 5532 is for conecting from my pc
- docker run -d -p 5532:5432 --name postgres14 --network spring -e POSTGRES_PASSWORD=sasa2032 -e POSTGRES_DB=msvc_cursos -v data-postgres:/var/lib/postgresql/data --restart=always postgres:14-alpine
+    docker run -d -p 5532:5432 --name postgres14 --network spring -e POSTGRES_PASSWORD=sasa2032 -e POSTGRES_DB=msvc_cursos -v data-postgres:/var/lib/postgresql/data --restart=always postgres:14-alpine
 ---This commands is for starting a container that connects to my postgres and can run sql commands
- docker run -it --rm --network spring postgres:14-alpine psql -h postgres14 -U postgres
+    docker run -it --rm --network spring postgres:14-alpine psql -h postgres14 -U postgres
 
 --Create container for usuarios
- docker run -p 8001:8001 -d --rm --name msvc-usuarios --network spring usuarios
+    docker run -p 8001:8001 -d --rm --name msvc-usuarios --network spring usuarios
 
 --Create container for cursos
-  docker run -p 8002:8002 -d --rm --name msvc-cursos --network spring cursos
+    docker run -p 8002:8002 -d --rm --name msvc-cursos --network spring cursos
+
+--Push images to Docker Hub Repositories
+---This command creates a "copy" of curso-docker-msvc-usuarios but with the tag manureq/usuarios (the same tag as the name of my repository)
+    docker tag curso-docker-msvc-usuarios manureq/usuarios
+---This command creates a "copy" of curso-docker-msvc-cursos but with the tag manureq/cursos (the same tag as the name of my repository)
+    docker tag curso-docker-msvc-cursos manureq/cursos
+---This command is for pushing the image
+    docker push manureq/usuarios
+    docker push manureq/cursos
+
+--Pull images from Docker Hub Repositories
+---This command pulls from Docker Hub
+    docker pull manureq/usuarios
+    docker pull manureq/cursos
