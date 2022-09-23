@@ -30,9 +30,12 @@ services:
 
   msvc-usuarios:
     container_name: msvc-usuarios
-    build:
-      context: ./
-      dockerfile: ./msvc-usuarios/Dockerfile
+# If image is uncommented it will download the image from repository
+    image: manureq/usuarios
+# If build is uncommented it will build the image from docker
+#    build:
+#      context: ./
+#      dockerfile: ./msvc-usuarios/Dockerfile
     ports:
       - "8001:8001"
     env_file:
@@ -45,9 +48,12 @@ services:
 
   msvc-cursos:
     container_name: msvc-cursos
-    build:
-      context: ./
-      dockerfile: ./msvc-cursos/Dockerfile
+# If image is uncommented it will download the image from repository
+    image: manureq/cursos
+# If build is uncommented it will build the image from docker
+#    build:
+#      context: ./
+#      dockerfile: ./msvc-cursos/Dockerfile
     ports:
       - "8002:8002"
     env_file:

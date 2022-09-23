@@ -39,3 +39,8 @@ Port 5532 is for conecting from my pc
 ---This command is for pushing the image
     docker push manureq/usuarios
     docker push manureq/cursos
+
+--Pull images from Docker Hub Repositories
+---This command pulls from Docker Hub
+    docker pull manureq/usuarios
+    docker pull manureq/cursos
