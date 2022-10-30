@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Update of DockerCommands.txt">
+    <list default="true" id="97bf50fd-3fdd-4e73-9f05-a6c099588857" name="Changes" comment="Update of Commands and deployment-mysql.yaml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DockerCommands.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DockerCommands.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +70,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -91,7 +89,7 @@
       <recent name="org.manuel.springcloud.msvc.cursos.configs" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.postgres14: Compose Deployment">
+  <component name="RunManager" selected="Application.MsvcCursosApplication">
     <configuration name="MsvcCursosApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.manuel.springcloud.msvc.cursos.MsvcCursosApplication" />
       <module name="msvc-cursos" />
@@ -170,11 +168,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yml.postgres14: Compose Deployment" />
-        <item itemvalue="Docker.msvc-usuarios/Dockerfile builder" />
+        <item itemvalue="Maven.msvc-usuarios [clean]" />
         <item itemvalue="Application.MsvcUsuariosApplication" />
         <item itemvalue="Application.MsvcCursosApplication" />
-        <item itemvalue="Maven.msvc-usuarios [clean]" />
       </list>
     </recent_temporary>
   </component>
@@ -439,7 +435,21 @@
       <option name="project" value="LOCAL" />
       <updated>1663935208688</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Update of DockerCommands.txt">
+      <created>1663968280761</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1663968280761</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Update of Commands and deployment-mysql.yaml">
+      <created>1665194390320</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1665194390320</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -453,7 +463,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="push_images_docker_hub" />
+                        <option value="origin/master" />
                       </list>
                     </value>
                   </entry>
@@ -464,9 +474,23 @@
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First Commit" />
     <MESSAGE value="Creation class User" />
     <MESSAGE value="Creation UserRepository.java" />
     <MESSAGE value="Course" />
@@ -491,6 +515,11 @@
     <MESSAGE value="Creation of docker-compose.yml" />
     <MESSAGE value="Update of docker-compose.yml so that it can build images if they are not built" />
     <MESSAGE value="Update of DockerCommands.txt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update of DockerCommands.txt" />
+    <MESSAGE value="Update of Commands and deployment-mysql.yaml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update of Commands and deployment-mysql.yaml" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
